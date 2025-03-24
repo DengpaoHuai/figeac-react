@@ -1,12 +1,5 @@
-import { MouseEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
-import DemoComponent from "./components/DemoComponent";
-
-const waitFor = (ms: number) => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-};
 
 type Planet = {
   name: string;
@@ -25,46 +18,48 @@ type Planet = {
   url: string;
 };
 
-function App() {
-  const config = {
-    title: "Hello World",
-    content: "toto",
-  };
-  const [planets, setPlanets] = useState<Planet[]>([]);
+type PlanetResponse = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Planet[];
+};
 
-  /* fetch("https://swapi.dev/api/planets")
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      setPlanets(data.results);
-    });*/
-  const [count, setCounter] = useState(5);
+function App() {
+  const [planets, setPlanets] = useState<PlanetResponse>({
+    count: 0,
+    next: null,
+    previous: null,
+    results: [],
+  });
+
+  const fetchPlanets = async (url: string) => {
+    const response = await fetch(url);
+    const data = await response.json();
+    setPlanets(data);
+  };
 
   useEffect(() => {
-    waitFor(2000).then(() => {
-      fetch("https://swapi.dev/api/planets")
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          setPlanets(data.results);
-        });
-    });
-  }, [count]);
+    fetchPlanets("https://swapi.dev/api/planets/");
+  }, []);
 
   return (
     <>
-      {/*
-        <p>{count}</p>
-      <button onClick={() => setCounter(count + 1)}>Increment</button>
-      <DemoComponent content={config}>
-        <h3>un peu de texte</h3>
-      </DemoComponent>
-  */}
-      {planets.map((planet) => {
+      {planets.results.map((planet) => {
         return <p key={planet.url}>{planet.name}</p>;
       })}
+      <button
+        disabled={!planets.previous}
+        onClick={() => fetchPlanets(planets.previous!)}
+      >
+        Previous
+      </button>
+      <button
+        disabled={!planets.next}
+        onClick={() => fetchPlanets(planets.next!)}
+      >
+        Next
+      </button>
     </>
   );
 }
