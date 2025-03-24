@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import "./App.css";
+import useFetch from "./hooks/useFetch";
 
 type Planet = {
   name: string;
@@ -18,48 +18,50 @@ type Planet = {
   url: string;
 };
 
-type PlanetResponse = {
+export type PlanetResponse = {
   count: number;
   next: string | null;
   previous: string | null;
   results: Planet[];
 };
 
+export type People = {
+  name: string;
+  height: string;
+  mass: string;
+  hair_color: string;
+};
+
+export type PeopleResponse = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: People[];
+};
+
 function App() {
-  const [planets, setPlanets] = useState<PlanetResponse>({
-    count: 0,
-    next: null,
-    previous: null,
-    results: [],
-  });
-
-  const fetchPlanets = async (url: string) => {
-    const response = await fetch(url);
-    const data = await response.json();
-    setPlanets(data);
-  };
-
-  useEffect(() => {
-    fetchPlanets("https://swapi.dev/api/planets/");
-  }, []);
+  const {
+    data: planets,
+    isLoading,
+    error,
+  } = useFetch<PlanetResponse>("https://swapi.dev/api/planets/");
+  const { data: people, isLoading: isLoadingPeople } = useFetch<PeopleResponse>(
+    "https://swapi.dev/api/people/"
+  );
 
   return (
     <>
-      {planets.results.map((planet) => {
+      <h2>Star Wars planets</h2>
+      {isLoading && <p>Loading...</p>}
+      {error && <p>{error.message}</p>}
+      {planets?.results.map((planet) => {
         return <p key={planet.url}>{planet.name}</p>;
       })}
-      <button
-        disabled={!planets.previous}
-        onClick={() => fetchPlanets(planets.previous!)}
-      >
-        Previous
-      </button>
-      <button
-        disabled={!planets.next}
-        onClick={() => fetchPlanets(planets.next!)}
-      >
-        Next
-      </button>
+      <h2>Star Wars people</h2>
+      {isLoadingPeople && <p>Loading...</p>}
+      {people?.results.map((person) => {
+        return <p key={person.name}>{person.name}</p>;
+      })}
     </>
   );
 }
