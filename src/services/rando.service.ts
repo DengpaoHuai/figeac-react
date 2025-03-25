@@ -1,6 +1,8 @@
 import httpClient from "../lib/http-client";
 import { Rando, randoSchema } from "../schemas/rando.schema";
 
+const waitFor = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 export const createRando = async (rando: Omit<Rando, "_id">) => {
   const response = await httpClient.post("/rando", rando);
   return response.data;
@@ -19,6 +21,9 @@ export const updateRando = async (id: string, rando: Rando) => {
 };
 
 export const deleteRando = async (id: string) => {
+  await waitFor(2000);
+  // throw new Error("");
+
   const response = await httpClient.delete(`/rando/${id}`);
   return response.data;
 };
