@@ -7,7 +7,6 @@ import {
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
-import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { useMemo } from "react";
 
 const persister = createSyncStoragePersister({
@@ -20,10 +19,10 @@ function App() {
   const router = useMemo(() => createAppRouter(queryClient), [queryClient]);
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    </>
   );
 }
 
