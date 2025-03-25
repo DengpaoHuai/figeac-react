@@ -25,7 +25,7 @@ const CreateRando = () => {
     console.log(data);
     createRando(data)
       .then(() => {
-        navigate("/list_rando");
+        navigate("/rando");
       })
       .catch((error) => {
         console.error(error);

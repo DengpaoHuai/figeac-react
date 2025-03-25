@@ -1,37 +1,22 @@
-import { Fragment, useEffect, useState } from "react";
-import { deleteRando, getRando } from "../services/rando.service";
-import { Rando } from "../schemas/rando.schema";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { Link } from "react-router";
+import { RandoContext } from "../contexts/RandoContextProvider";
 
 const ListRando = () => {
-  /*const { data, refetch } = useFetch<Rando[]>(
-    "https://crudcrud.com/api/4eb34a5b8dfa4d73b34a7f19dbb6bf93/rando"
-  );*/
-  const [rando, setRando] = useState<Rando[]>([]);
-
-  useEffect(() => {
-    getRando().then((rando) => {
-      setRando(rando);
-    });
-  }, []);
-
-  const deleteRandoItem = (id: string) => {
-    deleteRando(id).then(() => {
-      setRando(rando.filter((rando) => rando._id !== id));
-    });
-  };
+  const { randos, deleteRandoById } = useContext(RandoContext);
 
   return (
     <div>
       <h1>Liste des randonnées</h1>
-      <Link to="/create_rando">Créer une randonnée</Link>
+      <Link to="/rando/create">Créer une randonnée</Link>
       <ul>
-        {rando.map((rando) => (
+        {randos.map((rando) => (
           <Fragment key={rando._id}>
             <li>{rando.name}</li>
-            <button onClick={() => deleteRandoItem(rando._id)}>
+            <button onClick={() => deleteRandoById(rando._id)}>
               Supprimer
             </button>
+            <Link to={`/rando/${rando._id}`}>Détail</Link>
           </Fragment>
         ))}
       </ul>

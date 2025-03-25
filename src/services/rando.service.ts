@@ -22,3 +22,8 @@ export const deleteRando = async (id: string) => {
   const response = await httpClient.delete(`/rando/${id}`);
   return response.data;
 };
+
+export const getRandoById = async (id: string) => {
+  const response = await httpClient.get(`/rando/${id}`);
+  return randoSchema.parse(response.data);
+};
