@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router";
 import { Rando, randoSchema } from "../schemas/rando.schema";
 import { createRando } from "../services/rando.service";
+import { useRando } from "../contexts/RandoContextProvider";
 
 const CreateRando = () => {
   const {
@@ -21,9 +22,11 @@ const CreateRando = () => {
 
   const navigate = useNavigate();
 
+  const { createRandoButPasPareilQueDansLeService } = useRando();
+
   const onSubmitMaisPAsVraimentonSubmit = (data: Omit<Rando, "_id">) => {
     console.log(data);
-    createRando(data)
+    createRandoButPasPareilQueDansLeService(data)
       .then(() => {
         navigate("/rando");
       })

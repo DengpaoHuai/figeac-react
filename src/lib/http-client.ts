@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_KEY = "4eb34a5b8dfa4d73b34a7f19dbb6bf93";
+export const API_KEY = "0bf2f4023cda4f68b1bdb08584f7f1ea";
 
 const httpClient = axios.create({
   baseURL: `https://crudcrud.com/api/${API_KEY}`,
