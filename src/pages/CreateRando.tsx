@@ -3,8 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
 import { Rando, randoSchema } from "../schemas/rando.schema";
-import { createRando } from "../services/rando.service";
-import { useRando } from "../contexts/RandoContextProvider";
+import useRando from "../stores/useRandoStore";
 
 const CreateRando = () => {
   const {

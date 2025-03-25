@@ -1,9 +1,10 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import { Link } from "react-router";
 import { RandoContext } from "../contexts/RandoContextProvider";
+import useRando from "../stores/useRandoStore";
 
 const ListRando = () => {
-  const { randos, deleteRandoById } = useContext(RandoContext);
+  const { randos, deleteRandoById } = useRando();
 
   return (
     <div>
