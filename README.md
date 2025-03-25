@@ -1,3 +1,3 @@
-1 : post de la donnée sur crudcrud
-2 : faire la liste
-3 : faire le delete depuis la liste
+1 : créer le formulaire d'update
+2 : pré-remplir le formulaire avec les données de l'object à modifier (defaultValues)
+3 : mettre à jour la liste sans refaire d'appel API (modification du cache)
