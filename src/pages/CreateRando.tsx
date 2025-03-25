@@ -2,26 +2,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
-import { z } from "zod";
-
-const randoSchema = z.object({
-  name: z
-    .string()
-    .min(3, "Le nom doit contenir au moins 3 caractères")
-    .max(12, "Le nom ne doit pas dépasser 12 caractères"),
-  km: z.coerce.number().min(1, "La distance doit être supérieure à 0"),
-  type: z.enum(["rando", "trail", "marche"]),
-});
-
-type Rando = z.infer<typeof randoSchema>;
+import { Rando, randoSchema } from "../schemas/rando.schema";
+import { createRando } from "../services/rando.service";
 
 const CreateRando = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Rando>({
-    resolver: zodResolver(randoSchema),
+  } = useForm<Omit<Rando, "_id">>({
+    resolver: zodResolver(randoSchema.omit({ _id: true })),
     defaultValues: {
       name: "",
       km: 5,
@@ -31,14 +21,15 @@ const CreateRando = () => {
 
   const navigate = useNavigate();
 
-  const onSubmitMaisPAsVraimentonSubmit = (data: Rando) => {
+  const onSubmitMaisPAsVraimentonSubmit = (data: Omit<Rando, "_id">) => {
     console.log(data);
-    //fetch moi tout ça comme un grand vers crudcrud
-    fetch("https://crudcrud.com/api/69696969696969696969696969696969/rando", {
-      method: "POST",
-      body: JSON.stringify(data),
-    });
-    navigate("/");
+    createRando(data)
+      .then(() => {
+        navigate("/list_rando");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (

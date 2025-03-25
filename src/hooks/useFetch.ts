@@ -25,10 +25,12 @@ const useFetch = <T>(url: string) => {
     });
   }, []);
 
+
   return {
     data,
     isLoading,
     error,
+    refetch: fetchPlanets,
   };
 };
 
