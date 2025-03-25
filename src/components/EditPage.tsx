@@ -1,20 +1,15 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getRando, updateRando } from "../services/rando.service";
+import { useQuery } from "@tanstack/react-query";
+import { getRando } from "../services/rando.service";
 import { Rando, randoSchema } from "../schemas/rando.schema";
-import { useNavigate, useNavigation, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const EditRando = () => {
-  const { id } = useParams<{ id: string }>();
-
-  const { data: randos, isLoading } = useQuery<Rando[]>({
-    queryKey: ["randos"],
-    queryFn: getRando,
-  });
-
-  const rando = randos?.find((rando) => rando._id === id);
-
+type RandoProps = {
+  id: string;
+  rando: Rando;
+};
+const EditPage = ({ id, rando }: RandoProps) => {
   const {
     register,
     handleSubmit,
@@ -28,35 +23,9 @@ const EditRando = () => {
     },
   });
 
-  const navigation = useNavigate();
-  const queryClient = useQueryClient();
-
-  const onSubmit = async (data: Omit<Rando, "_id">) => {
-    await mutation.mutateAsync(data);
-
-    navigation("/rando");
+  const onSubmit = (data: Omit<Rando, "_id">) => {
+    console.log(data);
   };
-
-  const mutation = useMutation({
-    mutationFn: (data: Omit<Rando, "_id">) => updateRando(id!, data),
-    onSuccess: (data, variable) => {
-      console.log(data);
-      console.log(variable);
-      queryClient.setQueryData(["randos"], (old: Rando[]) => {
-        return old.map((rando) => {
-          console.log(rando);
-
-          if (rando._id === id) {
-            return {
-              ...variable,
-              _id: id,
-            };
-          }
-          return rando;
-        });
-      });
-    },
-  });
 
   return (
     <div className="app">
@@ -130,4 +99,4 @@ const EditRando = () => {
   );
 };
 
-export default EditRando;
+export default EditPage;

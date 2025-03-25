@@ -8,6 +8,7 @@ const ListRando = () => {
   const { data: randos } = useQuery<Rando[]>({
     queryKey: ["randos"],
     queryFn: getRando,
+    staleTime: 60000000,
   });
   const queryClient = useQueryClient();
 
@@ -45,6 +46,7 @@ const ListRando = () => {
               Supprimer
             </button>
             <Link to={`/rando/${rando._id}`}>Détail</Link>
+            <Link to={`/rando/${rando._id}/edit`}>Editer</Link>
           </Fragment>
         ))}
       </ul>

@@ -15,7 +15,7 @@ export const getRando = async () => {
   return data;
 };
 
-export const updateRando = async (id: string, rando: Rando) => {
+export const updateRando = async (id: string, rando: Omit<Rando, "_id">) => {
   const response = await httpClient.put(`/rando/${id}`, rando);
   return response.data;
 };
