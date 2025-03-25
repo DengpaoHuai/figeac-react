@@ -5,7 +5,7 @@ import { deleteRando, getRando } from "../services/rando.service";
 import { Rando } from "../schemas/rando.schema";
 
 const ListRando = () => {
-  const { data: randos } = useQuery({
+  const { data: randos } = useQuery<Rando[]>({
     queryKey: ["randos"],
     queryFn: getRando,
   });
