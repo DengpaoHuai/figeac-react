@@ -12,3 +12,21 @@ https://tkdodo.eu/blog/working-with-zustand
 https://www.youtube.com/shorts/Y7oS9Evn_2o
 
 https://github.com/alan2207/bulletproof-react
+
+https://artificialanalysis.ai/models
+
+https://replicate.com/
+
+https://huggingface.co
+
+https://mswjs.io/docs/getting-started
+
+https://react95.github.io/React95/?path=/story/all--all
+
+https://storybook.js.org/addons
+
+https://github.com/alan2207/bulletproof-react/blob/master/apps/react-vite/src/testing/mocks/handlers/users.ts
+
+https://www.npmjs.com/package/lodash.debounce
+
+https://ghuntley.com/tradecraft/

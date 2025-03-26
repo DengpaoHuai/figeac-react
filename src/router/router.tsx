@@ -8,6 +8,7 @@ import EditRando from "../pages-old/EditRando";
 import { QueryClient } from "@tanstack/react-query";
 import { getRando } from "../services/rando.service";
 import { randoConfig } from "../features/rando/api/get-rando";
+import useRando from "../stores/useRandoStore";
 
 export const createAppRouter = (queryClient: QueryClient) =>
   createBrowserRouter([
@@ -42,7 +43,7 @@ export const createAppRouter = (queryClient: QueryClient) =>
               element: <EditRando></EditRando>,
               loader: async () => {
                 await queryClient.prefetchQuery(randoConfig);
-
+                // useRando().
                 // redirect("/rando");
               },
             },

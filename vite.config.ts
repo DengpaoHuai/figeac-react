@@ -5,10 +5,10 @@ import { configDefaults } from "vitest/config";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  /* test: {
+  test: {
     globals: true,
     environment: "jsdom",
     setupFiles: ["./src/test/setup.ts"],
     exclude: [...configDefaults.exclude, "e2e/*"],
-  },*/
+  },
 });

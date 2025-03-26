@@ -1,8 +1,8 @@
 import { createBrowserRouter, redirect } from "react-router";
-import CreateRando from "../pages-old/CreateRando";
-import ListRando from "../pages-old/ListRandoPage";
 import { QueryClient } from "@tanstack/react-query";
 import PlanetList from "./routes";
+import ListRandoPage from "./routes/rando";
+import CreateRando from "./routes/rando/create";
 
 export const createAppRouter = (queryClient: QueryClient) =>
   createBrowserRouter([
@@ -15,7 +15,7 @@ export const createAppRouter = (queryClient: QueryClient) =>
       children: [
         {
           path: "",
-          element: <ListRando />,
+          element: <ListRandoPage />,
         },
         {
           path: "create",

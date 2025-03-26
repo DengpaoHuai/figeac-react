@@ -1,0 +1,7 @@
+{
+  "testRunner": "vitest",
+  "vitest": {
+    "configFile": "vite.config.ts",
+    "dir": "packages"
+  }
+}

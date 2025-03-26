@@ -51,7 +51,7 @@ function PlanetList() {
   );
 
   useEffect(() => {
-    let scrollEvent = (e: Event) => {
+    const scrollEvent = (e: Event) => {
       console.log("scroll", e);
     };
     addEventListener("scroll", scrollEvent);
