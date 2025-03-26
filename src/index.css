@@ -193,3 +193,8 @@ input.error:focus, select.error:focus, textarea.error:focus {
     --border-color: #334155;
   }
 }
+
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}

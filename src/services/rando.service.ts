@@ -11,20 +11,13 @@ export const createRando = async (rando: Omit<Rando, "_id">) => {
 export const getRando = async () => {
   const response = await httpClient.get("/rando");
   //check data with schema
+  await waitFor(2000);
   const data = response.data.map((rando: Rando) => randoSchema.parse(rando));
   return data;
 };
 
 export const updateRando = async (id: string, rando: Omit<Rando, "_id">) => {
   const response = await httpClient.put(`/rando/${id}`, rando);
-  return response.data;
-};
-
-export const deleteRando = async (id: string) => {
-  await waitFor(2000);
-  // throw new Error("");
-
-  const response = await httpClient.delete(`/rando/${id}`);
   return response.data;
 };
 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Rando } from "../schemas/rando.schema";
 
 const useFetch = <T>(url: string) => {
   const [data, setData] = useState<T | null>(null);
@@ -24,7 +25,6 @@ const useFetch = <T>(url: string) => {
       }
     });
   }, []);
-
 
   return {
     data,

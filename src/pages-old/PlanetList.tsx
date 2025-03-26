@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import useFetch from "../hooks/useFetch";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Button } from "primereact/button";
 
 type Planet = {
   name: string;
@@ -76,12 +77,12 @@ function PlanetList() {
             ))}
           </div>
         )}
-        <button onClick={() => setPage(page - 1)} disabled={page === 1}>
+        <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
           Page précédente
-        </button>
-        <button onClick={() => setPage(page + 1)} disabled={!planets?.next}>
+        </Button>
+        <Button onClick={() => setPage(page + 1)} disabled={!planets?.next}>
           Page suivante
-        </button>
+        </Button>
       </main>
 
       <footer className="app-footer">

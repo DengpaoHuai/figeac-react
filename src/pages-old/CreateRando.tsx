@@ -36,21 +36,6 @@ const CreateRando = () => {
 
   return (
     <div className="app">
-      <header className="app-header">
-        <div className="container header-content">
-          <nav className="nav-links">
-            <Link to="/" className="nav-link">
-              Planètes
-            </Link>
-            <Link to="/demo" className="nav-link">
-              Démo
-            </Link>
-            <Link to="/create-rando" className="nav-link active">
-              Créer Rando
-            </Link>
-          </nav>
-        </div>
-      </header>
 
       <main className="main-content container">
         <div className="form-container">

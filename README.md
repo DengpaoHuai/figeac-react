@@ -6,3 +6,9 @@ ctrl + maj + P
 fortmat document (pour chaque nouvelle extension)
 prettier (code formatter)
 settings - format on save
+
+https://tkdodo.eu/blog/working-with-zustand
+
+https://www.youtube.com/shorts/Y7oS9Evn_2o
+
+https://github.com/alan2207/bulletproof-react
